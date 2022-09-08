@@ -1,7 +1,9 @@
+import { Registration } from "src/registrations/registration.entity";
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn
 } from "typeorm";
 
@@ -13,7 +15,7 @@ export class User {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
@@ -25,7 +27,7 @@ export class User {
   @Column({ name: "added_by" })
   addedBy: string;
 
-  @Column({ name: "active_user" })
+  @Column({ name: "active_user", default: false })
   activeUser: boolean;
 
   @Column()
@@ -36,4 +38,7 @@ export class User {
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
+
+  @OneToMany(() => Registration, (registration) => registration.user)
+  registrations: Registration[];
 }

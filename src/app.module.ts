@@ -5,6 +5,8 @@ import { AppService } from "./app.service";
 import { UsersModule } from "./users/users.module";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { User } from "./users/user.entity";
+import { RegistrationsModule } from "./registrations/registrations.module";
+import { Registration } from "./registrations/registration.entity";
 
 @Module({
   imports: [
@@ -18,13 +20,14 @@ import { User } from "./users/user.entity";
         username: configService.get("DB_USERNAME"),
         password: configService.get("DB_PASSWORD"),
         database: configService.get("DB_NAME"),
-        entities: [User],
+        entities: [User, Registration],
         synchronize: true,
         logging: true
       }),
       inject: [ConfigService]
     }),
-    UsersModule
+    UsersModule,
+    RegistrationsModule
   ],
   controllers: [AppController],
   providers: [AppService]
