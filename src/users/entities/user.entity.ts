@@ -1,4 +1,4 @@
-import { Registration } from "src/registrations/registration.entity";
+import { Registration } from "src/registrations/entities/registration.entity";
 import {
   Column,
   CreateDateColumn,
