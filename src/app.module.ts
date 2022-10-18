@@ -7,6 +7,7 @@ import { RegistrationsModule } from "./registrations/registrations.module";
 import { Registration } from "./registrations/entities/registration.entity";
 import { UsersModule } from "./users/users.module";
 import { User } from "./users/entities/user.entity";
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { User } from "./users/entities/user.entity";
       inject: [ConfigService]
     }),
     UsersModule,
-    RegistrationsModule
+    RegistrationsModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService]

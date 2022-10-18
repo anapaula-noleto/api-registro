@@ -24,7 +24,7 @@ export class User {
   @Column()
   photo: string;
 
-  @Column({ name: "added_by" })
+  @Column({ name: "added_by", nullable: true, default: null })
   addedBy: string;
 
   @Column({ name: "active_user", default: false })
