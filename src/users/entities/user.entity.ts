@@ -33,8 +33,8 @@ export class User {
   @Column()
   course: string;
 
-  @Column({ name: "user_type" })
-  userType: string;
+  @Column({ default: false })
+  admin: boolean;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
