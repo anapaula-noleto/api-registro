@@ -21,6 +21,7 @@ async function bootstrap() {
       "API for logging people in and out of a lab and generating reports"
     )
     .setVersion("1.0")
+    .addBearerAuth()
     .addTag("Register", "Entry and exit registration operations")
     .addTag("User", "Operations about user ")
     .build();
