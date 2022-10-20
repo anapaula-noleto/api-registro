@@ -1,7 +1,8 @@
-import { Body, Controller, Post } from "@nestjs/common";
-import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Param, Patch, Post } from "@nestjs/common";
+import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { IsPublic } from "src/auth/decorators/is-public.decorator";
 import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateActivationDto } from "./dto/update-activation.dto";
 import { UsersService } from "./users.service";
 
 @ApiTags("User")
@@ -26,10 +27,14 @@ export class UsersController {
   //   return this.usersService.findOne(+id);
   // }
 
-  // @Patch(":id")
-  // update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
-  //   return this.usersService.update(+id, updateUserDto);
-  // }
+  @ApiBearerAuth()
+  @Patch("user/activate/:id")
+  updateActivation(
+    @Param("id") id: string,
+    @Body() updateActivationDto: UpdateActivationDto
+  ) {
+    return this.usersService.updateActivation(id, updateActivationDto);
+  }
 
   // @Delete(":id")
   // remove(@Param("id") id: string) {
