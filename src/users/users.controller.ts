@@ -1,16 +1,17 @@
 import { Body, Controller, Post } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { IsPublic } from "src/auth/decorators/is-public.decorator";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UsersService } from "./users.service";
 
 @ApiTags("User")
-@Controller("users")
+@Controller()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @IsPublic()
-  @Post()
+  @Post("signup")
+  @ApiOperation({ summary: "Create a new user" })
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
