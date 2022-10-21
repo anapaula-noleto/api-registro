@@ -1,6 +1,8 @@
 import { Body, Controller, Param, Patch, Post } from "@nestjs/common";
 import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { IsPublic } from "src/auth/decorators/is-public.decorator";
+import { Roles } from "src/common/decorators/roles.decorator";
+import { Role } from "src/enums/role.enum";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateActivationDto } from "./dto/update-activation.dto";
 import { UsersService } from "./users.service";
@@ -29,6 +31,7 @@ export class UsersController {
 
   @ApiBearerAuth()
   @Patch("user/activate/:id")
+  @Roles(Role.ADMIN)
   updateActivation(
     @Param("id") id: string,
     @Body() updateActivationDto: UpdateActivationDto

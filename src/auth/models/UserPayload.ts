@@ -1,7 +1,7 @@
 export interface UserPayload {
   sub: string;
   email: string;
-  admin: boolean;
+  role: string;
   iat?: number;
   exp?: number;
 }

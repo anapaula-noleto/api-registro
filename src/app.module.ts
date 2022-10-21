@@ -6,6 +6,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
 import { JwtAuthGuard } from "./auth/guards/jwt-auth.guard";
+import { RolesGuard } from "./common/guards/role.guard";
 import { Registration } from "./registrations/entities/registration.entity";
 import { RegistrationsModule } from "./registrations/registrations.module";
 import { User } from "./users/entities/user.entity";
@@ -39,6 +40,10 @@ import { UsersModule } from "./users/users.module";
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard
     }
   ]
 })

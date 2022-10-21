@@ -1,3 +1,4 @@
+import { Role } from "src/enums/role.enum";
 import { Registration } from "src/registrations/entities/registration.entity";
 import {
   Column,
@@ -33,8 +34,8 @@ export class User {
   @Column()
   course: string;
 
-  @Column({ default: false })
-  admin: boolean;
+  @Column({ default: "user" })
+  role: Role;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
