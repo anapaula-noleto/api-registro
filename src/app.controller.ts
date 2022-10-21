@@ -1,5 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
-import { ApiBearerAuth } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOperation } from "@nestjs/swagger";
 import { AppService } from "./app.service";
 import { CurrentUser } from "./auth/decorators/current-user.decorator";
 import { User } from "./users/entities/user.entity";
@@ -10,6 +10,7 @@ export class AppController {
 
   @ApiBearerAuth()
   @Get("me")
+  @ApiOperation({ summary: "Get data about the current user" })
   getMe(@CurrentUser() user: User) {
     return user;
   }

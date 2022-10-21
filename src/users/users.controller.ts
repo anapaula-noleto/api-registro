@@ -14,7 +14,7 @@ export class UsersController {
 
   @IsPublic()
   @Post("signup")
-  @ApiOperation({ summary: "Create a new user" })
+  @ApiOperation({ summary: "Create a new user." })
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
@@ -30,7 +30,9 @@ export class UsersController {
   // }
 
   @ApiBearerAuth()
-  @ApiOperation({ summary: "Activates a User." })
+  @ApiOperation({
+    summary: "Activates a user. Only admins can use this route."
+  })
   @Patch("user/activate/:id")
   @Roles(Role.ADMIN)
   updateActivation(

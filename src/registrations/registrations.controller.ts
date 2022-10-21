@@ -1,47 +1,32 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete
-} from "@nestjs/common";
-import { RegistrationsService } from "./registrations.service";
+import { Body, Controller, Post } from "@nestjs/common";
+import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { CreateRegistrationDto } from "./dto/create-registration.dto";
-import { UpdateRegistrationDto } from "./dto/update-registration.dto";
-import { ApiTags } from "@nestjs/swagger";
+import { RegistrationsService } from "./registrations.service";
 
+@ApiBearerAuth()
 @ApiTags("Register")
 @Controller("registrations")
 export class RegistrationsController {
   constructor(private readonly registrationsService: RegistrationsService) {}
 
+  @ApiOperation({ summary: "Records that the user is in the lab." })
   @Post()
-  create(@Body() createRegistrationDto: CreateRegistrationDto) {
-    return this.registrationsService.create(createRegistrationDto);
+  create(@Body() { userId }: CreateRegistrationDto) {
+    return this.registrationsService.create({ userId });
   }
 
-  @Get()
-  findAll() {
-    return this.registrationsService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.registrationsService.findAll();
+  // }
 
-  @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.registrationsService.findOne(+id);
-  }
+  // @Get(":id")
+  // findOne(@Param("id") id: string) {
+  //   return this.registrationsService.findOne(+id);
+  // }
 
-  @Patch(":id")
-  update(
-    @Param("id") id: string,
-    @Body() updateRegistrationDto: UpdateRegistrationDto
-  ) {
-    return this.registrationsService.update(+id, updateRegistrationDto);
-  }
-
-  @Delete(":id")
-  remove(@Param("id") id: string) {
-    return this.registrationsService.remove(+id);
-  }
+  // @Delete(":id")
+  // remove(@Param("id") id: string) {
+  //   return this.registrationsService.remove(+id);
+  // }
 }
