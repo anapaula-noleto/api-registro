@@ -1,4 +1,12 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post
+} from "@nestjs/common";
 import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { CreateRegistrationDto } from "./dto/create-registration.dto";
 import { RegistrationsService } from "./registrations.service";
@@ -24,9 +32,10 @@ export class RegistrationsController {
   // findOne(@Param("id") id: string) {
   //   return this.registrationsService.findOne(+id);
   // }
-
-  // @Delete(":id")
-  // remove(@Param("id") id: string) {
-  //   return this.registrationsService.remove(+id);
-  // }
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: "Records that the user out of the lab." })
+  @Delete(":id")
+  remove(@Param("id") id: string) {
+    return this.registrationsService.remove(id);
+  }
 }

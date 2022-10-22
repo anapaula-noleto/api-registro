@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UsersService } from "@users/users.service";
-import { Not, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { CreateRegistrationDto } from "./dto/create-registration.dto";
 import { Registration } from "./entities/registration.entity";
 
@@ -30,11 +30,12 @@ export class RegistrationsService {
 
   findOpenRegistration(userId: string) {
     return this.registrationRepository.findOne({
+      loadRelationIds: true,
       where: {
         user: {
           id: userId
         },
-        deletedAt: Not(null)
+        deletedAt: null
       }
     });
   }
@@ -43,7 +44,11 @@ export class RegistrationsService {
   //   return `This action updates a #${id} registration`;
   // }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} registration`;
-  // }
+  async remove(userId: string) {
+    const openRegistration = await this.findOpenRegistration(userId);
+    if (!openRegistration) {
+      throw new BadRequestException("The user is not logged in the lab.");
+    }
+    await this.registrationRepository.softDelete(openRegistration.id);
+  }
 }
