@@ -24,9 +24,9 @@ export class RegistrationsService {
     this.registrationRepository.save({ user });
   }
 
-  // findAll() {
-  //   return `This action returns all registrations`;
-  // }
+  async findAll() {
+    return await this.registrationRepository.find({ withDeleted: true });
+  }
 
   findOpenRegistration(userId: string) {
     return this.registrationRepository.findOne({

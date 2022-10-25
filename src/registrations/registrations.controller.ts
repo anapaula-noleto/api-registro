@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   HttpCode,
   HttpStatus,
   Param,
@@ -23,10 +24,10 @@ export class RegistrationsController {
     return this.registrationsService.create({ userId });
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.registrationsService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.registrationsService.findAll();
+  }
 
   // @Get(":id")
   // findOne(@Param("id") id: string) {
