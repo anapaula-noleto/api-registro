@@ -1,4 +1,4 @@
-import { Role } from "@enums/role.enum";
+import { Role } from "src/enums/role.enum";
 import { Registration } from "src/registrations/entities/registration.entity";
 import {
   Column,

@@ -1,8 +1,8 @@
-import { Role } from "@enums/role.enum";
 import { Body, Controller, Param, Patch, Post } from "@nestjs/common";
 import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { IsPublic } from "src/auth/decorators/is-public.decorator";
 import { Roles } from "src/common/decorators/roles.decorator";
+import { Role } from "../enums/role.enum";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateActivationDto } from "./dto/update-activation.dto";
 import { UsersService } from "./users.service";
