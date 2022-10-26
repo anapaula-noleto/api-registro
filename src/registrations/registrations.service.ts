@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { UsersService } from "@users/users.service";
 import { Repository } from "typeorm";
+import { UsersService } from "../users/users.service";
 import { CreateRegistrationDto } from "./dto/create-registration.dto";
 import { Registration } from "./entities/registration.entity";
 

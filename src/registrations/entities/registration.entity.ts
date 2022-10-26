@@ -1,4 +1,3 @@
-import { User } from "@users/entities/user.entity";
 import {
   CreateDateColumn,
   DeleteDateColumn,
@@ -6,6 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn
 } from "typeorm";
+import { User } from "../../users/entities/user.entity";
 
 @Entity({ name: "registrations" })
 export class Registration {
