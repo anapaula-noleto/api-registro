@@ -14,12 +14,12 @@ export class RegistrationsSeeder implements SeederInterface {
     private readonly registrationRepository: Repository<Registration>,
     @InjectRepository(User) private readonly usersRepository: Repository<User>
   ) {}
-  async seed(): Promise<void> {
+  async seed(numberOfSeeds: number): Promise<void> {
     const data: Partial<Registration>[] = [];
 
     const users = await this.usersRepository.find();
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < numberOfSeeds; i++) {
       data.push({
         user: faker.helpers.arrayElement(users),
         createdAt: faker.date.recent(),

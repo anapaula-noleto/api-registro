@@ -23,7 +23,7 @@ export class SeedService {
 
     await Bluebird.each(this.seeders, async (seeder: SeederInterface) => {
       this.logger.log(`Seeding ${seeder.constructor.name}`);
-      await seeder.seed();
+      await seeder.seed(20);
     });
   }
 }

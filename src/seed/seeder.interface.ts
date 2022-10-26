@@ -1,3 +1,3 @@
 export interface SeederInterface {
-  seed(): Promise<void>;
+  seed(numberOfSeeds: number): Promise<void>;
 }

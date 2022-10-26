@@ -22,7 +22,7 @@ export class CreateUserDto {
   email: string;
 
   @ApiProperty({
-    example: "string123_123",
+    example: "String123",
     description:
       "The password must have at least a letter, a number and eight characters. Maximum 20 characters allowed."
   })
