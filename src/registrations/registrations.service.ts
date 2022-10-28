@@ -5,7 +5,7 @@ import {
   paginate,
   Pagination
 } from "nestjs-typeorm-paginate";
-import { Repository } from "typeorm";
+import { Like, Repository } from "typeorm";
 import { UsersService } from "../users/users.service";
 import { CreateRegistrationDto } from "./dto/create-registration.dto";
 import { Registration } from "./entities/registration.entity";
@@ -60,13 +60,16 @@ export class RegistrationsService {
   async paginate(
     options: IPaginationOptions
   ): Promise<Pagination<Registration>> {
-    const queryBuilder = this.registrationRepository.createQueryBuilder("r");
-    queryBuilder.orderBy("r.id", "DESC"); // Or whatever you need to do
-
+    const { inLabOnly, name } = options;
     return paginate<Registration>(this.registrationRepository, options, {
-      withDeleted: true,
+      withDeleted: !inLabOnly,
       relations: {
         user: true
+      },
+      where: {
+        user: {
+          name: name ? Like(`%${name}%`) : undefined
+        }
       },
       select: {
         user: {

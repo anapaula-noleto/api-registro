@@ -7,6 +7,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseBoolPipe,
   ParseIntPipe,
   Post,
   Query
@@ -38,15 +39,22 @@ export class RegistrationsController {
   @Get()
   @ApiQuery(FindAllRegistrationsPagination.page)
   @ApiQuery(FindAllRegistrationsPagination.limit)
+  @ApiQuery(FindAllRegistrationsPagination.inLabOnly)
+  @ApiQuery(FindAllRegistrationsPagination.name)
   findAll(
     @Query("page", new DefaultValuePipe(1), ParseIntPipe) page = 1,
-    @Query("limit", new DefaultValuePipe(10), ParseIntPipe) limit = 10
+    @Query("limit", new DefaultValuePipe(10), ParseIntPipe) limit = 10,
+    @Query("name", new DefaultValuePipe(undefined)) name: string,
+    @Query("inLabOnly", new DefaultValuePipe(true), ParseBoolPipe)
+    inLabOnly = true
   ): Promise<Pagination<Registration>> {
     limit = limit > 100 ? 100 : limit;
     return this.registrationsService.paginate({
       page,
       limit,
-      route: "localhost:3000/registration"
+      inLabOnly,
+      route: "localhost:3000/registration",
+      name
     });
   }
 

@@ -18,8 +18,14 @@ export const FindAllRegistrationsPagination: ObjectOfOptions = {
   inLabOnly: {
     name: "inLabOnly",
     description:
-      "Choose to show only registers os people in the lab or all registers. Default is true.",
+      "Choose to show only registers of people in the lab or all registers. Default is true.",
     type: Boolean,
+    required: false
+  },
+  name: {
+    name: "name",
+    description: "Filter user name.",
+    type: String,
     required: false
   }
 };
