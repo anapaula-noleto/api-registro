@@ -9,7 +9,7 @@ export class LoginRequestBody {
   email: string;
 
   @ApiProperty({
-    example: "string123_123"
+    example: "String123"
   })
   @IsString()
   password: string;

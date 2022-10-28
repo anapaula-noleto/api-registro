@@ -1,15 +1,26 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   Get,
   HttpCode,
   HttpStatus,
   Param,
-  Post
+  ParseIntPipe,
+  Post,
+  Query
 } from "@nestjs/common";
-import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiQuery,
+  ApiTags
+} from "@nestjs/swagger";
+import { Pagination } from "nestjs-typeorm-paginate";
 import { CreateRegistrationDto } from "./dto/create-registration.dto";
+import { Registration } from "./entities/registration.entity";
+import { FindAllRegistrationsPagination } from "./models/Paginations";
 import { RegistrationsService } from "./registrations.service";
 
 @ApiBearerAuth()
@@ -25,8 +36,18 @@ export class RegistrationsController {
   }
 
   @Get()
-  findAll() {
-    return this.registrationsService.findAll();
+  @ApiQuery(FindAllRegistrationsPagination.page)
+  @ApiQuery(FindAllRegistrationsPagination.limit)
+  findAll(
+    @Query("page", new DefaultValuePipe(1), ParseIntPipe) page = 1,
+    @Query("limit", new DefaultValuePipe(10), ParseIntPipe) limit = 10
+  ): Promise<Pagination<Registration>> {
+    limit = limit > 100 ? 100 : limit;
+    return this.registrationsService.paginate({
+      page,
+      limit,
+      route: "localhost:3000/registration"
+    });
   }
 
   // @Get(":id")

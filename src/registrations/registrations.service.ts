@@ -1,5 +1,10 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import {
+  IPaginationOptions,
+  paginate,
+  Pagination
+} from "nestjs-typeorm-paginate";
 import { Repository } from "typeorm";
 import { UsersService } from "../users/users.service";
 import { CreateRegistrationDto } from "./dto/create-registration.dto";
@@ -50,5 +55,31 @@ export class RegistrationsService {
       throw new BadRequestException("The user is not logged in the lab.");
     }
     await this.registrationRepository.softDelete(openRegistration.id);
+  }
+
+  async paginate(
+    options: IPaginationOptions
+  ): Promise<Pagination<Registration>> {
+    const queryBuilder = this.registrationRepository.createQueryBuilder("r");
+    queryBuilder.orderBy("r.id", "DESC"); // Or whatever you need to do
+
+    return paginate<Registration>(this.registrationRepository, options, {
+      withDeleted: true,
+      relations: {
+        user: true
+      },
+      select: {
+        user: {
+          name: true,
+          id: true,
+          photo: true
+        }
+      },
+      order: {
+        user: {
+          name: "ASC"
+        }
+      }
+    });
   }
 }
