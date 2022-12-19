@@ -1,8 +1,8 @@
 // NestJS
 import {
   ExecutionContext,
-  Injectable,
-  UnauthorizedException
+  ForbiddenException,
+  Injectable
 } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 // Password
@@ -38,10 +38,10 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
 
     return canActivatePromise.catch((error) => {
       if (error instanceof UnauthorizedError) {
-        throw new UnauthorizedException(error.message);
+        throw new ForbiddenException(error.message);
       }
 
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     });
   }
 }
