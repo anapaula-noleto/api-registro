@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import {
   IsEmail,
+  IsOptional,
   IsString,
   Matches,
   MaxLength,
@@ -36,7 +37,8 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsString()
-  photo: string;
+  @IsOptional()
+  photo?: string;
 
   @ApiProperty({
     example: "Engenharia Elétrica"

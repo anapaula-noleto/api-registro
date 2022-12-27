@@ -1,10 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsUUID } from "class-validator";
+import { IsBoolean, IsNumber, IsUUID } from "class-validator";
 
 export class UpdateActivationDto {
   @ApiProperty()
-  @IsUUID("4")
-  addedBy: string;
+  @IsNumber()
+  addedBy: number;
 
   @ApiProperty()
   @IsBoolean()

@@ -1,5 +1,5 @@
-import { Role } from "src/enums/role.enum";
-import { Registration } from "src/registrations/entities/registration.entity";
+import { Role } from "../../enums/role.enum";
+import { Registration } from "../../registrations/entities/registration.entity";
 import {
   Column,
   CreateDateColumn,
@@ -10,8 +10,8 @@ import {
 
 @Entity({ name: "users" })
 export class User {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryGeneratedColumn("increment")
+  id: number;
 
   @Column()
   name: string;
@@ -19,14 +19,14 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @Column()
-  photo: string;
+  photo?: string;
 
   @Column({ name: "added_by", nullable: true, default: null })
-  addedBy: string;
+  addedBy: number;
 
   @Column({ name: "active_user", default: false })
   activeUser: boolean;

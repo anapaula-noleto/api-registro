@@ -1,3 +1,3 @@
 export class IdParameter {
-  id: string;
+  id: number;
 }

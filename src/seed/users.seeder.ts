@@ -21,7 +21,7 @@ export class UsersSeeder implements SeederInterface {
 
     for (let i = 0; i < numberOfSeeds; i++) {
       data.push({
-        id: faker.datatype.uuid(),
+        id: i,
         name: faker.name.fullName(),
         course: faker.helpers.arrayElement(CourseExamples),
         email: faker.internet.email(),

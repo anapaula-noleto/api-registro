@@ -25,7 +25,8 @@ import { UsersModule } from "./users/users.module";
         password: configService.get("DB_PASSWORD"),
         database: configService.get("DB_NAME"),
         entities: [User, Registration],
-        synchronize: true,
+        migrations: ["src/database/migrations/*.ts"],
+        synchronize: false,
         logging: true
       }),
       inject: [ConfigService]

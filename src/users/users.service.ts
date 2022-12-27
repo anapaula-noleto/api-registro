@@ -37,12 +37,12 @@ export class UsersService {
     return this.userRepository.findOne({ where: { email } });
   }
 
-  findOneById(id: string): Promise<User> {
+  findOneById(id: number): Promise<User> {
     return this.userRepository.findOne({ where: { id } });
   }
 
   async updateActivation(
-    id: string,
+    id: number,
     updateActivationDto: UpdateActivationDto
   ): Promise<void> {
     const user = await this.findOneById(id);

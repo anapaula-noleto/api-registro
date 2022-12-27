@@ -40,7 +40,7 @@ export class UsersController {
   // }
 
   // @Get(":id")
-  // findOne(@Param("id") id: string) {
+  // findOne(@Param("id") id: number) {
   //   return this.usersService.findOne(+id);
   // }
 
@@ -54,7 +54,7 @@ export class UsersController {
   updateActivation(
     @Param("id") idParameter: IdParameter,
     @Body() activeUserDTO: ActiveUserDTO,
-    @CurrentUser("id") adminId: string
+    @CurrentUser("id") adminId: number
   ) {
     const updateActivationDto: UpdateActivationDto = {
       activeUser: activeUserDTO.activeUser,
@@ -63,13 +63,13 @@ export class UsersController {
     console.log(updateActivationDto);
     console.log(IdParameter);
     return this.usersService.updateActivation(
-      idParameter as unknown as string,
+      idParameter as unknown as number,
       updateActivationDto
     );
   }
 
   // @Delete(":id")
-  // remove(@Param("id") id: string) {
+  // remove(@Param("id") id: number) {
   //   return this.usersService.remove(+id);
   // }
 }

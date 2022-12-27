@@ -33,7 +33,7 @@ export class RegistrationsService {
     return await this.registrationRepository.find({ withDeleted: true });
   }
 
-  findOpenRegistration(userId: string) {
+  findOpenRegistration(userId: number) {
     return this.registrationRepository.findOne({
       loadRelationIds: true,
       where: {
@@ -49,7 +49,7 @@ export class RegistrationsService {
   //   return `This action updates a #${id} registration`;
   // }
 
-  async remove(userId: string) {
+  async remove(userId: number) {
     const openRegistration = await this.findOpenRegistration(userId);
     if (!openRegistration) {
       throw new BadRequestException("The user is not logged in the lab.");

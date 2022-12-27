@@ -65,7 +65,7 @@ export class RegistrationsController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: "Records that the user out of the lab." })
   @Delete(":id")
-  remove(@Param("id") id: string) {
+  remove(@Param("id") id: number) {
     return this.registrationsService.remove(id);
   }
 }

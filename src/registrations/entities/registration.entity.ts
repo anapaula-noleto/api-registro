@@ -9,7 +9,7 @@ import { User } from "../../users/entities/user.entity";
 
 @Entity({ name: "registrations" })
 export class Registration {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn("increment")
   id: string;
 
   @ManyToOne(() => User, (user) => user.registrations, { onDelete: "SET NULL" })
