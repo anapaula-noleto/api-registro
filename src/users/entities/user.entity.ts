@@ -3,6 +3,7 @@ import { Registration } from "../../registrations/entities/registration.entity";
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   OneToMany,
   PrimaryGeneratedColumn
@@ -37,9 +38,12 @@ export class User {
   @Column({ default: "user" })
   role: Role;
 
-  @CreateDateColumn({ name: "created_at" })
-  createdAt: Date;
-
   @OneToMany(() => Registration, (registration) => registration.user)
   registrations: Registration[];
+
+  @DeleteDateColumn({ name: "deleted_at" })
+  deletedAt: Date;
+
+  @CreateDateColumn({ name: "created_at" })
+  createdAt: Date;
 }
